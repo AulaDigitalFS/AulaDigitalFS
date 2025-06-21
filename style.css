@@ -86,7 +86,6 @@ form {
   gap: 10px;
   max-width: 400px;
   margin: left;
-
 }
 
 input, textarea {
@@ -97,7 +96,7 @@ input, textarea {
 
 button {
   background-color: #64b5f6;
-  color: Black;
+  color: black;
   border: none;
   padding: 10px;
   border-radius: 5px;
