@@ -3,7 +3,8 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #121212;
+  background: url('https://images.unsplash.com/photo-1549921296-3a6b6b3b2e4f?auto=format&fit=crop&w=1950&q=80') no-repeat fixed center;
+  background-size: cover;
   color: #e0e0e0;
 }
 
@@ -13,28 +14,27 @@ a {
 }
 
 header {
-  background-color: #1f1f1f;
+  background-color: rgba(31, 31, 31, 0.9);
   color: white;
   padding: 20px;
-  text-align: center;
 }
 
 .logo-titulo {
   display: flex;
-  align-items: left;
-  justify-content: left;
-  gap: 35px;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.logo {
+.logo-izquierda {
   width: 60px;
   height: 60px;
-  border-radius: 8px;
+  margin-left: 20px;
 }
 
-nav {
-  margin-top: 10px;
+.titulo-centro {
+  flex: 1;
+  text-align: center;
+  margin-right: 60px;
 }
 
 nav ul {
@@ -49,106 +49,12 @@ nav ul {
 nav ul li a {
   color: white;
   font-weight: bold;
-  transition: color 0.3s;
-}
-
-nav ul li a:hover {
-  color: #ffd54f;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
 }
 
 main {
   padding: 30px 20px;
   max-width: 1000px;
   margin: auto;
-}
-
-section {
-  margin-bottom: 50px;
-}
-
-section h2 {
-  color: #90caf9;
-}
-
-ul li {
-  margin: 10px 0;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  margin: left;
-}
-
-input, textarea {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-}
-
-button {
-  background-color: #64b5f6;
-  color: black;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.galeria {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.tarjeta {
-  background-color: #1f1f1f;
-  border-left: 5px solid #64b5f6;
-  padding: 15px;
-  border-radius: 5px;
-  flex: 1;
-  min-width: 200px;
-}
-
-footer {
-  background-color: #1f1f1f;
-  text-align: center;
-  padding: 20px;
-  color: #ccc;
-}
-
-.social a {
-  margin: 0 10px;
-  font-size: 20px;
-  color: #90caf9;
-}
-
-#menu.show {
-  display: block;
-  flex-direction: column;
-  gap: 10px;
-}
-
-@media screen and (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  nav ul {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav ul#menu.show {
-    display: flex;
-  }
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
 }
