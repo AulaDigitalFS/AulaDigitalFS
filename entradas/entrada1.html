@@ -58,10 +58,18 @@
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
         })();
-      </script>
-      <noscript>Activa JavaScript para ver los comentarios.</noscript>
-    </section>
-  </main>
+      <script>
+  var disqus_config = function () {
+    this.page.url = window.location.href;
+    this.page.identifier = window.location.pathname;
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://aula-digital-fs.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
 
   <footer>
     <p>&copy; 2025 AulaDigitalFS - Franklin Solórzano</p>
