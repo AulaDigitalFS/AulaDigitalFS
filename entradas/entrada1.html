@@ -45,31 +45,23 @@
     </article>
 
     <section class="comentarios">
-      <h3>Comentarios</h3>
-      <div id="disqus_thread"></div>
-      <script>
-        var disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = window.location.pathname;
-        };
-        (function() {
-          var d = document, s = d.createElement('script');
-          s.src = 'https://aula-digital-fs.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      <script>
-  var disqus_config = function () {
-    this.page.url = window.location.href;
-    this.page.identifier = window.location.pathname;
-  };
-  (function() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://aula-digital-fs.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
+  <h3>Comentarios</h3>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://aula-digital-fs.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Activa JavaScript para ver los comentarios.</noscript>
+</section>
 
   <footer>
     <p>&copy; 2025 AulaDigitalFS - Franklin Solórzano</p>
