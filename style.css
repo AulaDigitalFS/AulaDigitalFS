@@ -12,28 +12,43 @@ a {
   text-decoration: none;
 }
 
-header {
-  background-color: rgba(31, 31, 31, 0.9);
-  color: white;
-  padding: 20px;
-}
-
-.logo-titulo {
+.encabezado {
+  position: relative;
+  height: 100px;
   display: flex;
-  align-items: left;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-izquierda {
-  width: 60px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   height: 60px;
-  margin-left: 20px;
 }
 
 .titulo-centro {
-  flex: 1;
   text-align: center;
-  margin-right: 60px;
+}
+
+.titulo-centro h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.titulo-centro p {
+  margin: 0;
+  font-size: 1em;
+  opacity: 0.8;
+}
+
+
+header {
+  background-color: #1f1f1f;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
 nav ul {
@@ -44,23 +59,64 @@ nav ul {
   gap: 20px;
   flex-wrap: wrap;
 }
-nav {
-  margin-top: 10px;
-}
+
 nav ul li a {
   color: white;
   font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ffd54f;
 }
 .menu-toggle {
   display: none;
   font-size: 28px;
   cursor: pointer;
 }
+main {
+  padding: 30px 20px;
+  max-width: 1000px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+section h2 {
+  color: #90caf9;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
 
 input, textarea {
   padding: 10px;
   border: none;
   border-radius: 5px;
+}
+
+
+button {
+  background-color: #64b5f6;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.galeria {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .tarjeta {
@@ -71,35 +127,28 @@ input, textarea {
   flex: 1;
   min-width: 200px;
 }
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 500px;
-}
-button {
-  background-color: #64b5f6;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.galeria {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
 footer {
   background-color: #1f1f1f;
   text-align: center;
   padding: 20px;
   color: #ccc;
 }
-main {
-  padding: 30px 20px;
-  max-width: 1000px;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
+.social a {
+  margin: 0 10px;
+  font-size: 30px;
+  color: #90caf9;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+nav ul#menu.show {
+    display: flex;
+  }
+.genially-container {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }

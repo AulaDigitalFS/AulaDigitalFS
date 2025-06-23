@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Blog | AulaDigitalFS</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - AulaDigitalFS</title>
+  <link rel="stylesheet" href="blog-style.css">
 </head>
 <body>
   <header>
-    <div class="logo-titulo encabezado">
-      <img src="assets/logoAulaDigitalFS.png" alt="Logo" class="logo-izquierda"/>
+    <div class="encabezado">
+      <img src="assets/logoAulaDigitalFS.png" alt="Logo" class="logo-izquierda">
       <div class="titulo-centro">
         <h1>AulaDigitalFS</h1>
         <p>Tu espacio educativo digital</p>
@@ -16,18 +17,49 @@
     </div>
     <nav>
       <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="clases.html">Clases</a></li>
-        <li><a href="galeria.html">Proyectos</a></li>
-        <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="clases.html">Clases</a></li>
+      <li><a href="galeria.html">Proyectos</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html">Contactos</a></li>
+
       </ul>
     </nav>
   </header>
+
   <main>
-    <section>
-      <h2>Blog del Profe Franklin</h2>
-      <p>Publicaciones, reflexiones y artículos sobre la enseñanza técnica y experiencias docentes.</p>
+    <section class="blog-container">
+      <h2>Bienvenidos al Blog de AulaDigitalFS</h2>
+      <p>En este espacio compartiremos noticias, ideas, reflexiones y aportes sobre educación, tecnología y más.</p>
+
+      <article class="post-preview">
+        <img src="assets/img/post1.jpg" alt="Imagen de la entrada 1">
+        <div class="post-content">
+          <h3><a href="entradas/entrada1.html">5 herramientas digitales para el aula</a></h3>
+          <p>Explora herramientas tecnológicas que potencian el aprendizaje activo y colaborativo en tus clases.</p>
+        </div>
+      </article>
     </section>
+
+<section class="blog-container">
+      <h2>Partes Internas del computador</h2>
+      <p>son muchos los elementos que conforman el computador, es hora de conocer como funcionan.</p>
+
+      <article class="post-preview">
+        <img src="assets/img/post2.jpg" alt="Imagen de la entrada 1">
+        <div class="post-content">
+          <h3><a href="entradas/entrada2.html">Conoce más de la Fuente de Poder</a></h3>
+          <p>Todos sabemos el funcionamiento de la fuente de poder. Conoce más...</p>
+        </div>
+      </article>
+    </section>
+
+
   </main>
+
+  <footer>
+    <p>&copy; 2025 AulaDigitalFS - Franklin Solórzano</p>
+  </footer>
 </body>
 </html>
