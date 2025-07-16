@@ -4,34 +4,121 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AulaDigitalFS</title>
+  <link rel="stylesheet" href="menu.css"/>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="slider.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
- <header>
-  <div class="encabezado">
-    <img src="assets/logoAulaDigitalFS.png" alt="Logo" class="logo-izquierda">
-    <div class="titulo-centro">
-      <h1>AulaDigitalFS</h1>
-      <p>Tu espacio educativo digital</p>
+<header class="encabezado">
+<nav class="navbar">
+    <div class="logo-izquierda">
     </div>
-  </div>
-  <nav>
-    <ul>
+	<div class="encabezado2">
+	  <a href="index.html"><img src="assets/logoAulaDigitalFS2.png" alt="Logo" class="logo-izquierda"></a> </div>
+		<input type="checkbox" id="toggle">
+		<label for="toggle" class="menu-icon">&#9776;</label>
+		<label for="menu-toggle" class="menu-icon">&#9776;</label>
+		
+    <ul class="nav-links">
       <li><a href="index.html">Inicio</a></li>
+      <li class="dropdown">
+        <button class="submenu-toggle">
+         Clases <span class="arrow">&#9662;</span>
+         </button>
+         <ul class="dropdown-content">
+           <li><a href="#">Sistemas Operativos y Redes</a></li>
+           <li><a href="clasesST.html ">Soporte Técnico</a></li>
+          <li><a href="#">Diseño y Desarrollo Web</a></li>
+        </ul>
+      </li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="galeria.html">Galeria</a></li>
+      <li><a href="videoteca.html">Video</a></li>
+      <li><a href="blog.html">BlogFS</a></li>
       <li><a href="#recursos">Recursos</a></li>
-      <li><a href="clases.html">Clases</a></li>
-      <li><a href="galeria.html">Proyectos</a></li>
-      <li><a href="blog.html">Blog</a></li>
       <li><a href="#contacto">Contactos</a></li>
     </ul>
   </nav>
+ <script src="menu.js"></script>
 </header>
+<section class="carousel-container">
+  <div class="carousel">
+    <div class="slide active"><img src="assets/slider/foto1.jpg" alt="Foto 1"></div>
+    <div class="slide"><img src="assets/slider/foto2.jpg" alt="Foto 2"></div>
+    <div class="slide"><img src="assets/slider/foto3.jpg" alt="Foto 3"></div>
+    <div class="slide"><img src="assets/slider/foto4.jpg" alt="Foto 4"></div>
+    <div class="slide"><img src="assets/slider/foto5.jpg" alt="Foto 5"></div>
+    <div class="slide"><img src="assets/slider/foto6.jpg" alt="Foto 6"></div>
+    <div class="slide"><img src="assets/slider/foto7.jpg" alt="Foto 7"></div>
+    <div class="slide"><img src="assets/slider/foto8.jpg" alt="Foto 8"></div>
+    <div class="slide"><img src="assets/slider/foto9.jpg" alt="Foto 9"></div>
+    <div class="slide"><img src="assets/slider/foto10.jpg" alt="Foto 10"></div>
+  </div>
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+  let currentIndex = 0;
+  let slideInterval;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.transform = `translateX(-${index * 100}%)`;
+      dots[i].classList.toggle("active", i === index);
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  // Inicia animación automática
+  function startAutoSlide() {
+    slideInterval = setInterval(nextSlide, 4000);
+  }
+
+  // Detiene la animación automática
+  function stopAutoSlide() {
+    clearInterval(slideInterval);
+  }
+
+  // Permite clic en los puntos
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      stopAutoSlide();           // Detiene el automático
+      currentIndex = i;
+      showSlide(currentIndex);   // Muestra la imagen clicada
+      startAutoSlide();          // Reinicia automático después del clic
+    });
+  });
+
+  // Mostrar primer slide y empezar animación
+  showSlide(currentIndex);
+  startAutoSlide();
+</script>
+
 
   <main>
     <section class="bienvenida">
-      <h2>Bienvenido al Aula Digital FS</h2>
+      <h1><center>Bienvenidos al Aula Digital FS</center></h1>
       <p>Este sitio está diseñado para brindar acompañamiento académico a estudiantes, docentes y familias interesadas en fortalecer sus conocimientos tecnológicos. Aquí encontrarás material complementario, proyectos destacados y espacios de interacción educativa.</p>
+<br>
       <p><strong>¿Qué aprenderás aquí?</strong></p>
       <ul>
         <li>🖥 <strong>Sistemas Operativos y Redes:</strong> Instalación, configuración de redes y entornos virtuales.</li>
@@ -39,33 +126,39 @@
         <li>🌐 <strong>Diseño y Desarrollo Web:</strong> Creación de páginas web modernas con HTML, CSS y JavaScript.</li>
       </ul>
     </section>
+<br>
 
     <section id="recursos" class="destacados">
       <h2><i class="fas fa-folder-open"></i> Recursos Educativos</h2>
       <ul>
-        <li><a href="https://drive.google.com/">📘 Guía de Sistemas Operativos</a></li>
-        <li><a href="https://drive.google.com/">🧰 Manual de Soporte Técnico</a></li>
-        <li><a href="https://drive.google.com/">💻 Curso de Desarrollo Web</a></li>
-        <li><a href="https://drive.google.com/">📥 Formatos académicos</a></li>
+        <li><a href="https://drive.google.com/">📘 Manuales de Sistemas Operativos</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1QSQKEWiZWINwKchYJrWb01ug_1eO0mnz?usp=drive_link">🧰 Manuales de Soporte Técnico</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1tZBB3NB92FQ7615U0FPgU6JNb0jjdKV1?usp=drive_link">💻 Manuales de Desarrollo Web</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1OdY9ylqdaxV-KiFgIfUuaqkVz_DPHfxr?usp=drive_link">📥 Formatos académicos</a></li>
       </ul>
     </section>
+<br>
 
     <section id="proyectos">
-      <h2><i class="fas fa-project-diagram"></i> <a href="galeria.html"> Galería de Proyectos</a></h2>
+      <h2><i class="fas fa-project-diagram"></i> <a href="proyectos.html">Proyectos Estudiantiles</a></h2>
+<br>
       <div class="galeria">
+
         <div class="tarjeta"><h3>Proyecto 1</h3><p>Sitio web educativo con HTML/CSS</p></div>
         <div class="tarjeta"><h3>Proyecto 2</h3><p>Simulación de red con Packet Tracer</p></div>
-        <div class="tarjeta"><h3><a href="galeria.html">Proyecto 3</a></h3><p>Diagnóstico y reparación de PC</p></div>
+        <div class="tarjeta"><h3><a href="proyectos.html">Proyecto 3</a></h3><p>Diagnóstico y reparación de PC</p></div>
       </div>
     </section>
 
-    <section id="blog">
-      <h2><i class="fas fa-rss"></i> <a href="blog.html"> Blog del Profe 	Franklin</a></h2>
+    <section id="blog"><br>
+      <h2><i class="fas fa-rss"></i> <a href="blog.html"> Blog del Profe Franklin</a></h2>
+
       <p>Reflexiones, recursos y experiencias sobre educación técnica en informática.</p>
  	</section>
-
+<br>
+<br>
     <section id="contacto">
-      <h2><i class="fas fa-envelope"></i> Contáctame</h2>
+      <h2><i class="fas fa-envelope"></i> Contáctame</h2><br>
       <form>
         <input type="text" placeholder="Tu nombre" required />
         <input type="email" placeholder="Tu correo" required />
@@ -76,7 +169,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 AulaDigitalFS - Franklin Solórzano</p>
+    <p>&copy; 2025 AulaDigitalFS - Franklin Solórzano Jumbo</p>
     <div class="social">
       <a href="https://web.whatsapp.com/"><i class="fab fa-whatsapp"></i></a>
       <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>

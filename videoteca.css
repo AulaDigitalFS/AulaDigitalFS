@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #00bcd4;
+}
+
+header p {
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 5rem;
+  justify-items: center;
+  padding: 2rem;
+}
+
+.video-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px; /* o el tamaño que estés usando para cada tarjeta */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.video-card h4,
+.video-card p {
+  margin-top: 1rem;
+  color: #00e5ff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+  max-width: 100%; /* asegura que no se salga */
+}
+
+@media (max-width: 768px) {
+  .video-card iframe {
+    height: 200px;
+  }
+}
