@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Evaluación de Seguridad Informática</title>
+<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+  body { font-family: Arial, sans-serif; background:  #0050bb; padding: 30px; }
+  .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  h2 { text-align: center; }
+  .hidden { display: none; }
+  button { margin-top: 25px; padding: 10px 15px; border: none; background: #007bff; color: white; border-radius: 5px; cursor: pointer; }
+  button:hover { background: #0056b3; }
+
+p,a {
+font-size: 12pt;
+color: white;
+text-align: center;
+
+}
+
+/* Footer con iconos sociales */
+
+footer {
+
+  background: #0050bb;       /* Fondo oscuro */
+  color: #fff;            /* Texto blanco */
+  padding: 20px 10px;
+  text-align: center;     /* Centra todo el contenido */
+  
+
+}
+
+footer .social-icons {
+  margin: 1rem 10;
+  display: flex;
+  justify-content: center;  /* Centra íconos */
+  gap: 15px;
+}
+
+footer .social-icons a {
+  color: #fff;
+  font-size: 1.5rem;	
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;      /* Hace círculos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;        /* Fondo de los botones */
+}
+
+footer .social-icons a:hover {
+  background: #f39c12;     /* Fondo al pasar el mouse */
+  color: #fff;
+}
+
+footer p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: white;             /* Un gris suave */
+}
+
+
+
+</style>
+</head>
+<body>
+<div class="logo-izquierda">
+    </div>
+	<div class="encabezado2">
+	  <a href="index.html"><img src="assets/logoAulaDigitalFS2.png" alt="Logo" class="logo-izquierda"></a> </div>
+
+
+<div class="container">
+  <h2>Evaluación sobre Malware e Ingeniería Social</h2>
+  
+  <!-- Datos del estudiante -->
+  <div id="studentData">
+    <label>Estudiante: <input type="text" id="nombre" required></label><br><br>
+    <label>Curso:      <input type="text" id="curso" required></label><br><br>
+    <label>Paralelo:   <input type="text" id="paralelo" required></label><br><br>
+    <label>Fecha:      <input type="date" id="fecha" required></label><br><br>
+    <button onclick="startExam()">Comenzar Evaluación</button>
+  </div>
+  
+  <!-- Preguntas -->
+  <div id="quiz" class="hidden">
+    <p id="questionText"></p>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Siguiente</button>
+  </div>
+  
+  <!-- Resultados -->
+  <div id="result" class="hidden">
+    <h3>Resultado Final</h3>
+    <p id="score"></p>
+    <button onclick="downloadWord()">Descargar en Word</button>
+  </div>
+</div>
+
+<script>
+// ==== Banco de 45 preguntas ====
+const questionBank = [
+  { q: "¿Qué es un Troyano en informática?", options: ["Un virus que se replica solo", "Un programa que aparenta ser inofensivo pero es dañino", "Un antivirus avanzado", "Un firewall"], answer: 1 },
+  { q: "El keylogger se clasifica como:", options: ["Spyware", "Ransomware", "Worm", "Antivirus"], answer: 0 },
+  { q: "El ransomware se caracteriza por:", options: ["Robar contraseñas", "Cifrar archivos y pedir rescate", "Desfragmentar discos", "Bloquear la RAM"], answer: 1 },
+  { q: "Un gusano informático:", options: ["Requiere intervención del usuario para propagarse", "Se replica automáticamente por la red", "Protege el sistema", "Es un programa de respaldo"], answer: 1 },
+  { q: "La ingeniería social busca:", options: ["Mejorar redes sociales", "Manipular personas para obtener información", "Optimizar software", "Crear contraseñas seguras"], answer: 1 },
+  { q: "Un ejemplo de ingeniería social es:", options: ["Phishing", "Defragmentación", "Uso de firewall", "Instalación de drivers"], answer: 0 },
+  { q: "¿Qué significa 'phishing'?", options: ["Ataque de red", "Suplantación de identidad", "Virus de correo", "Protección de datos"], answer: 1 },
+  { q: "El 'baiting' consiste en:", options: ["Engañar con enlaces falsos", "Dejar un USB infectado para que alguien lo use", "Bloquear un sistema", "Actualizar el antivirus"], answer: 1 },
+  { q: "¿Qué es el 'pretexting'?", options: ["Un ataque con programas maliciosos", "Inventar historias falsas para obtener información", "Un método de cifrado", "Una actualización de software"], answer: 1 },
+  { q: "El 'shoulder surfing' ocurre cuando:", options: ["Se hackean redes sociales", "Se observa a alguien mientras introduce contraseñas", "Se instala spyware", "Se bloquea la pantalla"], answer: 1 },
+  { q: "¿Cuál de los siguientes es un ejemplo de spyware?", options: ["Keylogger", "Firewall", "Antivirus", "Backup"], answer: 0 },
+  { q: "¿Qué hace el adware?", options: ["Cifra datos", "Muestra anuncios no deseados", "Controla el hardware", "Protege contraseñas"], answer: 1 },
+  { q: "El malware que secuestra archivos es:", options: ["Ransomware", "Adware", "Gusano", "Troyano"], answer: 0 },
+  { q: "El backdoor permite:", options: ["Abrir accesos ocultos al sistema", "Eliminar malware", "Respaldar datos", "Acelerar el PC"], answer: 0 },
+  { q: "El rootkit está diseñado para:", options: ["Ocultar procesos maliciosos", "Mejorar seguridad", "Actualizar antivirus", "Eliminar spyware"], answer: 0 },
+  { q: "El pharming redirige a:", options: ["Sitios legítimos", "Sitios falsos", "Servidores de antivirus", "Archivos locales"], answer: 1 },
+  { q: "El scareware se basa en:", options: ["Amenazas y falsas alertas", "Replicación de virus", "Uso de puertos", "Cifrado de datos"], answer: 0 },
+  { q: "El botnet se forma con:", options: ["Redes de computadoras infectadas", "Firewalls", "Backups", "VPN"], answer: 0 },
+  { q: "Un ejemplo de gusano famoso fue:", options: ["ILOVEYOU", "Norton", "McAfee", "Bitdefender"], answer: 0 },
+  { q: "La técnica de 'dumpster diving' consiste en:", options: ["Buscar información en la basura física", "Hackear redes", "Interceptar correos", "Robar claves de wifi"], answer: 0 },
+  { q: "El malware que afecta al sector de arranque es:", options: ["Bootkit", "Spyware", "Adware", "Worm"], answer: 0 },
+  { q: "El spyware se diferencia del ransomware en que:", options: ["Roba información en lugar de cifrar archivos", "Se propaga más rápido", "Es legal", "No afecta usuarios"], answer: 0 },
+  { q: "La mejor defensa contra phishing es:", options: ["Ignorar correos sospechosos", "Abrir todos los enlaces", "Compartir contraseñas", "Instalar troyanos"], answer: 0 },
+  { q: "El malware polimórfico se caracteriza por:", options: ["Cambiar su código constantemente", "Ser siempre igual", "No propagarse", "Eliminar spyware"], answer: 0 },
+  { q: "El ransomware exige:", options: ["Pago de rescate", "Actualización del sistema", "Nueva contraseña", "Instalación de drivers"], answer: 0 },
+  { q: "El término 'payload' en malware se refiere a:", options: ["Parte dañina del ataque", "Antivirus", "Protección de firewall", "Backup"], answer: 0 },
+  { q: "El spear phishing es:", options: ["Phishing dirigido a una persona/organización específica", "Un virus autorreplicante", "Spam masivo", "Firewall avanzado"], answer: 0 },
+  { q: "El spoofing consiste en:", options: ["Suplantar direcciones IP o correos", "Cifrar datos", "Respaldar archivos", "Optimizar redes"], answer: 0 },
+  { q: "¿Qué es un exploit?", options: ["Un código que aprovecha vulnerabilidades", "Un antivirus", "Un backup", "Un firewall"], answer: 0 },
+  { q: "El ransomware WannaCry atacó en:", options: ["2017", "2005", "2012", "2020"], answer: 0 },
+  { q: "El spyware generalmente se oculta en:", options: ["Programas gratuitos", "Antivirus", "Backups", "Cortafuegos"], answer: 0 },
+  { q: "La mejor medida contra malware es:", options: ["Buenas prácticas de usuario", "Ignorar antivirus", "Abrir todo tipo de archivos", "Compartir contraseñas"], answer: 0 },
+  { q: "El hoax es:", options: ["Un bulo o engaño en internet", "Un antivirus", "Un spyware", "Un exploit"], answer: 0 },
+  { q: "El troyano bancario busca:", options: ["Robar credenciales financieras", "Actualizar el antivirus", "Cifrar la RAM", "Hacer copias de seguridad"], answer: 0 },
+  { q: "El spam puede ser:", options: ["Un vehículo para phishing", "Un firewall", "Una copia de seguridad", "Un exploit"], answer: 0 },
+  { q: "El ransomware bloquea:", options: ["Acceso a los archivos del usuario", "Publicidad", "Firewalls", "Antivirus"], answer: 0 },
+  { q: "El término 'zero-day' indica:", options: ["Vulnerabilidad sin parche", "Antivirus nuevo", "Firewall defectuoso", "Respaldo corrupto"], answer: 0 },
+  { q: "El malware que espía cámaras y micrófonos es:", options: ["Spyware", "Troyano", "Ransomware", "Adware"], answer: 0 },
+  { q: "El social engineering toolkit (SET) es:", options: ["Un marco de pruebas de ingeniería social", "Un spyware", "Un antivirus", "Un gusano"], answer: 0 },
+  { q: "El tailgating ocurre cuando:", options: ["Un intruso entra detrás de un empleado autorizado", "Se infecta un USB", "Se descarga adware", "Se cifra un archivo"], answer: 0 },
+  { q: "La ingeniería social se combate con:", options: ["Concientización y educación", "Compartir contraseñas", "Ignorar la seguridad", "Instalar troyanos"], answer: 0 },
+  { q: "El ransomware suele pedir pago en:", options: ["Criptomonedas", "Tarjeta de crédito", "Cheque", "PayPal"], answer: 0 },
+  { q: "El pharming redirige el tráfico a:", options: ["Sitios web falsos", "Servidores legítimos", "VPN", "Firewalls"], answer: 0 },
+  { q: "Un ejemplo de medida contra spyware es:", options: ["Instalar antispyware", "Desactivar antivirus", "Ignorar actualizaciones", "Compartir contraseñas"], answer: 0 },
+  { q: "Un botnet se controla mediante:", options: ["Servidor C&C", "Antivirus", "Usuario legítimo", "Firewall"], answer: 0 }
+];
+
+// ==== Variables globales ====
+let selectedQuestions = [];
+let currentQuestion = 0;
+let score = 0;
+let answersLog = [];
+
+// ==== Iniciar examen ====
+function startExam() {
+  const nombre = document.getElementById("nombre").value.trim();
+  const curso = document.getElementById("curso").value.trim();
+  const paralelo = document.getElementById("paralelo").value.trim();
+  const fecha = document.getElementById("fecha").value.trim();
+
+  if (!nombre || !curso || !paralelo || !fecha) {
+    alert("Por favor, complete todos los campos.");
+    return;
+  }
+
+  document.getElementById("studentData").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+
+  selectedQuestions = questionBank.sort(() => 0.5 - Math.random()).slice(0, 10);
+  currentQuestion = 0;
+  score = 0;
+  answersLog = [];
+  showQuestion();
+}
+
+// ==== Mostrar pregunta ====
+function showQuestion() {
+  const q = selectedQuestions[currentQuestion];
+  document.getElementById("questionText").innerText = (currentQuestion + 1) + ". " + q.q;
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+  q.options.forEach((opt, index) => {
+    const btn = document.createElement("button");
+    btn.innerText = opt;
+    btn.onclick = () => selectAnswer(index);
+    optionsDiv.appendChild(btn);
+    optionsDiv.appendChild(document.createElement("br"));
+  });
+}
+
+// ==== Seleccionar respuesta ====
+function selectAnswer(index) {
+  const q = selectedQuestions[currentQuestion];
+  let correct = index === q.answer;
+  if (correct) score++;
+
+  answersLog.push({
+    pregunta: q.q,
+    seleccion: q.options[index],
+    correcta: q.options[q.answer]
+  });
+
+  document.getElementById("options").innerHTML = "<p><b>" + (correct ? "✅ Correcto" : "❌ Incorrecto. Respuesta correcta: " + q.options[q.answer]) + "</b></p>";
+}
+
+// ==== Siguiente pregunta ====
+function nextQuestion() {
+  if (!answersLog[currentQuestion]) {
+    alert("Debe responder la pregunta antes de continuar.");
+    return;
+  }
+
+  currentQuestion++;
+  if (currentQuestion < selectedQuestions.length) {
+    showQuestion();
+  } else {
+    endExam();
+  }
+}
+
+// ==== Finalizar examen ====
+function endExam() {
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("score").innerText = "Tu calificación final es: " + score + " / " + selectedQuestions.length;
+}
+
+// ==== Descargar en Word ====
+function downloadWord() {
+  let nombre = document.getElementById("nombre").value;
+  let curso = document.getElementById("curso").value;
+  let paralelo = document.getElementById("paralelo").value;
+  let fecha = document.getElementById("fecha").value;
+
+  let content = "Evaluación - Malware e Ingeniería Social\n\n";
+  content += "Estudiante: " + nombre + "\n";
+  content += "Curso: " + curso + "\n";
+  content += "Paralelo: " + paralelo + "\n";
+  content += "Fecha: " + fecha + "\n\n";
+
+  answersLog.forEach((item, i) => {
+    content += (i+1) + ". " + item.pregunta + "\n";
+    content += "Respuesta: " + item.seleccion + "\n";
+    content += "Correcta: " + item.correcta + "\n\n";
+  });
+
+  content += "Calificación final: " + score + " / " + selectedQuestions.length + "\n";
+
+  let blob = new Blob([content], { type: "application/msword" });
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "evaluacion.doc";
+  link.click();
+}
+</script>
+
+<!-- Protección contra inspección -->
+<script>
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    alert("⚠️ Acción no permitida. Recuerda que la deshonestidad académica está sancionada por el Reglamento General de la LOEI, CAPÍTULO VII DE LA DESHONESTIDAD ACADÉMICA, Art. 223.");
+});
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
+        e.preventDefault();
+        alert("⚠️ No puedes inspeccionar el código. Deshonestidad académica: LOEI, Art. 223.");
+    }
+});
+</script>
+<br>
+<p>Esta evaluación Online es equivalente a una evaluación escrita tomada en las instalaciones de la Unidad Educativa, por tal razón, se recomienda realizarla con responsabilidad y honestidad. Ya que la deshonestidad académica es sancionada por la Lay de Educación y su Reglamento, en el CAPÍTULO VII DE LA DESHONESTIDAD ACADÉMICA, Art. 223 hasta el Art. 226.</p>
+<br>
+
+<p>Investiga más sobre la LA DESHONESTIDAD ACADÉMICA</p>
+<p><center><a href="https://educacion.gob.ec/wp-content/uploads/downloads/2017/05/Reglamento-General-Ley-Organica-Educacion-Intercultural.pdf">REGLAMENTO GENERAL A LA LEY ORGÁNICA DE EDUCACIÓN INTERCULTURAL</center></p></a>
+
+<footer>
+  <p>Síguenos en:</p>
+  <div class="social-icons">
+    <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://t.me/" target="_blank"><i class="fab fa-telegram"></i></a>
+    <a href="https://x.com/" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
+  </div>
+  <p>&copy; 2025 AulaDigitalFS - Fraklin Solorzano Jumbo - Tu espacio educativo digital</p>
+</footer>
+</body>
+</html>
+
+
+</body>
+</html>
